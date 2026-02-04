@@ -28,7 +28,7 @@ This system uses queues to process heayz tasks in the background, making the app
 - **FileStorage**: Cloudinary
 - **Email**: Nodemailer/ Gmail
 - **PDFKit** (for pdf generation)
-- **Logging** Winston
+- **Logging**: Winston
 
 ---
 
@@ -115,7 +115,7 @@ This system uses queues to process heayz tasks in the background, making the app
 7. Logging:
    - **Winston** logs event and errrors in the system for monitory of failed uploads or email
 
-## API Doumentatio
+## API Doumentation
 
 The complete API documentaion,including request and response examples, is available on postman:
 
