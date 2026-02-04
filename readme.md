@@ -42,27 +42,27 @@ This system uses queues to process heayz tasks in the background, making the app
 
 ### Installation
 
-1. Clone the repository
+1. Clone the repository.
 
 2. Install dependencies
-   npm install
+   - npm install
 
 3. Create .env file in the root:
-   PORT=8000
-   MONGO_URI=your_mongodb_uri
-   REDIS_HOST=127.0.0.1
-   REDIS_PORT=6379
-   CLOUDINARY_CLOUD_NAME=your_cloud_name
-   CLOUDINARY_API_KEY=your_api_key
-   CLOUDINARY_API_SECRET=your_api_secret
-   EMAIL_USER=your_email@example.com
-   EMAIL_PASS=your_email_password
+   - PORT=8000
+   - MONGO_URI=your_mongodb_uri
+   - REDIS_HOST=127.0.0.1
+   - REDIS_PORT=6379
+   - CLOUDINARY_CLOUD_NAME=your_cloud_name
+   - CLOUDINARY_API_KEY=your_api_key
+   - CLOUDINARY_API_SECRET=your_api_secret
+   - EMAIL_USER=your_email@example.com
+   - EMAIL_PASS=your_email_password
 
 4. Running the App
-   start the main application
-   npm run start
-   start the workers
-   npm run workers
+   - start the main application
+     - npm run start
+   - start the workers
+     - npm run workers
 
 5. The application will start on : http://localhost:8000
 
