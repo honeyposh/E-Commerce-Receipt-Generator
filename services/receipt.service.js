@@ -1,5 +1,4 @@
 const receiptModel = require("../models/receipt.model");
-const { v4: uuidv4 } = require("uuid");
 const logger = require("../utils/logger");
 const { pdfQueue } = require("../queue/pdfQueue");
 async function createReceipt(order) {
@@ -10,9 +9,7 @@ async function createReceipt(order) {
     logger.info(` Receipt already exists for order ${order.orderId}`);
     return existingReceipt;
   }
-  const receiptId = uuidv4();
   const receipt = await receiptModel.create({
-    receiptId,
     orderId: order.orderId,
     name: order.name,
     email: order.email,

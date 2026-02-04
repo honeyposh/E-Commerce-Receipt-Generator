@@ -62,7 +62,7 @@ exports.login = async (req, res, next) => {
       secure: true,
       httpOnly: true,
     });
-    return res.status(200).json({ success: true, token });
+    return res.status(200).json({ success: true });
   } catch (error) {
     next(error);
   }

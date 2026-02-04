@@ -1,5 +1,5 @@
 const { Worker } = require("bullmq");
-const uploadToCloud = require("../utils/upload_to_cloud");
+const { uploadToCloud } = require("../utils/cloudinary");
 const logger = require("../utils/logger");
 const { redisConnection } = require("../redis");
 const { emailQueue } = require("../queue/emailQueue");

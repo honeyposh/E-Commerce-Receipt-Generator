@@ -1,14 +1,9 @@
 const mongoose = require("mongoose");
 const receiptSchema = new mongoose.Schema({
-  receiptId: {
-    type: String,
-    required: true,
-  },
   orderId: {
     type: String,
     required: true,
   },
-
   name: String,
   email: String,
 

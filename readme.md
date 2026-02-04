@@ -16,6 +16,7 @@ This system uses queues to process heayz tasks in the background, making the app
   - cloud upload (cloudQueue)
   - email sending (emailQueue)
 - Retry logic for failed jobs
+- Logging of important events and errors using WInston
 
 ---
 
@@ -27,6 +28,7 @@ This system uses queues to process heayz tasks in the background, making the app
 - **FileStorage**: Cloudinary
 - **Email**: Nodemailer/ Gmail
 - **PDFKit** (for pdf generation)
+- **Logging** Winston
 
 ---
 
@@ -55,7 +57,7 @@ This system uses queues to process heayz tasks in the background, making the app
    - CLOUDINARY_CLOUD_NAME=your_cloud_name
    - CLOUDINARY_API_KEY=your_api_key
    - CLOUDINARY_API_SECRET=your_api_secret
-   - EMAIL_USER=your_email@example.com
+   - EMAIL_USER=your_email
    - EMAIL_PASS=your_email_password
 
 4. Running the App
@@ -110,6 +112,12 @@ This system uses queues to process heayz tasks in the background, making the app
    - Deletes the local PDF file to clean up storage.
 6. **Access Control**
    - Only **business owner** (admin users) can `GET /api/receipts` to fetch receipts
+7. Logging:
+   - **Winston** logs event and errrors in the system for monitory of failed uploads or email
+
+## API Doumentatio
+
+The complete API documentaion,including request and response examples, is available on postman:
 
 ## Author
 

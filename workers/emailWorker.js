@@ -1,4 +1,4 @@
-const { Worker, tryCatch } = require("bullmq");
+const { Worker } = require("bullmq");
 const logger = require("../utils/logger");
 const { redisConnection } = require("../redis");
 const sendReceiptEmail = require("../utils/mailer");

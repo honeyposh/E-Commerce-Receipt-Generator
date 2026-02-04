@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
-const cloudinary = require("../config/cloudinary");
+const { generateSignedReceiptUrl } = require("./cloudinary");
+
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
@@ -10,18 +11,9 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-function generateSignedReceiptUrl(publicId) {
-  return cloudinary.url(publicId, {
-    resource_type: "image",
-    type: "authenticated",
-    sign_url: true,
-    expires_at: Math.floor(Date.now() / 1000) + 10 * 60,
-  });
-}
-
 async function sendReceiptEmail(receipt, pdfPath, cloudUploaded = true) {
   const downloadLink = cloudUploaded
-    ? generateSignedReceiptUrl(receipt.pdfUrl)
+    ? generateSignedReceiptUrl(receipt.pdf.publicId)
     : null;
 
   const htmlBody = `
@@ -42,9 +34,11 @@ async function sendReceiptEmail(receipt, pdfPath, cloudUploaded = true) {
       ${
         downloadLink
           ? `<p style="margin-top: 15px;">
-              You can also download your receipt here: 
-              <a href="${downloadLink}" style="color: #ffffff; background-color: #007bff; padding: 8px 12px; text-decoration: none; border-radius: 4px;">Download Receipt</a>
-            </p>`
+          You can also download your receipt here: 
+           <a href="${downloadLink}" style="color: #ffffff; background-color: #007bff; padding: 8px 12px; text-decoration: none; border-radius: 4px;">
+          Download Receipt
+        </a>
+        </p>`
           : `<p><em>Download link is temporarily unavailable.</em></p>`
       }
 
@@ -61,7 +55,7 @@ async function sendReceiptEmail(receipt, pdfPath, cloudUploaded = true) {
     html: htmlBody,
     attachments: [
       {
-        filename: `receipt-${receipt.receiptId}.pdf`,
+        filename: `receipt-${receipt._id}.pdf`,
         path: pdfPath,
       },
     ],

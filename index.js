@@ -5,12 +5,10 @@ const port = process.env.PORT || 8000;
 const app = express();
 const userRoute = require("./routes/user.route");
 const cookieParser = require("cookie-parser");
-const businessRoute = require("./routes/bussiness.route");
 const receiptRoute = require("./routes/receipt.route");
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api", userRoute);
-app.use("/api", businessRoute);
 app.use("/api", receiptRoute);
 app.use((error, req, res, next) => {
   return res
