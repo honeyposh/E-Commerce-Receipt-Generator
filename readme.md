@@ -117,7 +117,7 @@ This system uses queues to process heayz tasks in the background, making the app
 
 ## API Doumentation
 
-The complete API documentaion,including request and response examples, is available on postman:
+The complete API documentaion,including request and response examples, is available on postman:https://documenter.getpostman.com/view/29716797/2sBXc7Mk6h
 
 ## Author
 
