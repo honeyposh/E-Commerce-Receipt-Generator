@@ -1,15 +1,7 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
+const fs = require("fs");
 const { generateSignedReceiptUrl } = require("./cloudinary");
-
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function sendReceiptEmail(receipt, pdfPath, cloudUploaded = true) {
   const downloadLink = cloudUploaded
@@ -46,9 +38,10 @@ async function sendReceiptEmail(receipt, pdfPath, cloudUploaded = true) {
       <p style="color: #888; font-size: 12px;">If you have any questions, reply to this email or contact our support team.</p>
     </div>
   `;
+  const pdfBuffer = fs.readFileSync(pdfPath);
 
-  await transporter.sendMail({
-    from: `"POSH WORLD" <${process.env.EMAIL_USER}>`,
+  await resend.emails.send({
+    from: "POSH WORLD <software@archsaintnexus.com>",
     to: receipt.email,
     subject: "Your Payment Receipt & Order Details",
     text: `Hello ${receipt.name}, your receipt is attached. Order ID: ${receipt.orderId}`,
@@ -56,7 +49,7 @@ async function sendReceiptEmail(receipt, pdfPath, cloudUploaded = true) {
     attachments: [
       {
         filename: `receipt-${receipt._id}.pdf`,
-        path: pdfPath,
+        content: pdfBuffer.toString("base64"),
       },
     ],
   });
