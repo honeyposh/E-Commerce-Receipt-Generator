@@ -1,7 +1,8 @@
 const receiptModel = require("../models/receipt.model");
 const logger = require("../utils/logger");
+const userModel = require("../models/user.model");
 const { pdfQueue } = require("../queue/pdfQueue");
-async function createReceipt(order) {
+async function createReceipt(order, user) {
   const existingReceipt = await receiptModel.findOne({
     orderId: order.orderId,
   });
@@ -9,10 +10,12 @@ async function createReceipt(order) {
     logger.info(` Receipt already exists for order ${order.orderId}`);
     return existingReceipt;
   }
+  const fullUser = await userModel.findById(user.id);
   const receipt = await receiptModel.create({
     orderId: order.orderId,
-    name: order.name,
-    email: order.email,
+    user: fullUser._id,
+    name: fullUser.firstName,
+    email: fullUser.email,
     items: order.items.map((item) => ({
       name: item.name,
       quantity: item.quantity,

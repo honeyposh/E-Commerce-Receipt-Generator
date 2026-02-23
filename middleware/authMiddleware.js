@@ -10,7 +10,10 @@ exports.authentication = async (req, res, next) => {
     if (error) {
       return next(error);
     }
-    req.user = { id: payload.id, role: payload.role };
+    req.user = {
+      id: payload.id,
+      role: payload.role,
+    };
+    next();
   });
-  next();
 };
